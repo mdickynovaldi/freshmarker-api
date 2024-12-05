@@ -4,7 +4,7 @@ import { prisma } from "../libs/db";
 import { ProductSchema } from "../../prisma/generated/zod";
 import {
   ParamsSlugSchema,
-  ProductInputSchema as ProductAddSchema,
+  ProductInputSchema as ProductInputSchema,
   ResponseMessageSchema,
 } from "../schemas/common";
 
@@ -77,7 +77,7 @@ productsRoute.openapi(
       body: {
         content: {
           "application/json": {
-            schema: ProductAddSchema,
+            schema: ProductInputSchema,
           },
         },
       },
@@ -117,6 +117,114 @@ productsRoute.openapi(
       return c.json(product, 201);
     } catch (error) {
       return c.json({ message: "Failed to add product" }, 400);
+    }
+  }
+);
+
+productsRoute.openapi(
+  createRoute({
+    method: "put",
+    path: "/update/:id",
+    tags,
+    description: "Edit existing product",
+    parameters: [
+      {
+        name: "id",
+        in: "path",
+        required: true,
+        schema: {
+          type: "string",
+        },
+      },
+    ],
+    request: {
+      body: {
+        content: {
+          "application/json": {
+            schema: ProductInputSchema,
+          },
+        },
+      },
+    },
+    responses: {
+      200: {
+        description: "Product updated successfully",
+        content: { "application/json": { schema: ProductSchema } },
+      },
+      400: {
+        description: "Failed to update product",
+        content: { "application/json": { schema: ResponseMessageSchema } },
+      },
+      404: {
+        description: "Product not found",
+        content: { "application/json": { schema: ResponseMessageSchema } },
+      },
+    },
+  }),
+  async (c) => {
+    const id = c.req.param("id");
+    const body = await c.req.valid("json");
+
+    try {
+      const product = await prisma.product.update({
+        where: {
+          id: id,
+        },
+        data: {
+          slug: body.slug,
+          name: body.name,
+          price: body.price,
+          description: body.description,
+          stock: body.stock,
+          weight: body.weight,
+        },
+        include: {
+          images: true,
+        },
+      });
+
+      return c.json(product, 200);
+    } catch (error) {
+      return c.json({ message: "Failed to add product" }, 400);
+    }
+  }
+);
+
+productsRoute.openapi(
+  createRoute({
+    method: "delete",
+    path: "/delete/:slug",
+    tags,
+    description: "Delete product by slug",
+    request: {
+      params: ParamsSlugSchema,
+    },
+    responses: {
+      200: {
+        description: "Product deleted successfully",
+        content: { "application/json": { schema: ResponseMessageSchema } },
+      },
+      404: {
+        description: "Product not found",
+        content: { "application/json": { schema: ResponseMessageSchema } },
+      },
+    },
+  }),
+  async (c) => {
+    const slug = c.req.valid("param");
+
+    try {
+      const product = await prisma.product.delete({
+        where: slug,
+      });
+
+      if (!product) {
+        return c.json({ message: "Product not found" }, 404);
+      }
+
+      return c.json({ message: "Product deleted successfully" }, 200);
+    } catch (error) {
+      return c.json({ message: "Failed to delete product" }, 404);
     }
   }
 );
