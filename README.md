@@ -76,16 +76,16 @@ Setup database:
 
 ```sh
 # Run database only
-docker compose -f docker-compose.yaml up -d
+docker compose up -d
 
-# Run all services
-docker compose up
+# Or
+bun docker:up
 ```
 
 Migrate database:
 
 ```sh
-bun db:migrate:dev
+bun migrate
 ```
 
 Seed initial products:
@@ -97,7 +97,11 @@ bun db:seed
 To run:
 
 ```sh
+# Development with hot reload
 bun dev
+
+# Or production
+bun start
 ```
 
 Open <http://localhost:3000>
