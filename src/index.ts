@@ -29,7 +29,7 @@ apiRoutes
       version: "v1",
     },
   })
-  .get("/docs/swagger", swaggerUI({ url: "/openapi.json" }))
+  .get("/swagger", swaggerUI({ url: "/openapi.json" }))
   .get("/docs", apiReference({ spec: { url: "/openapi.json" } }))
   .onError((err, c) => {
     return c.json({ code: 500, status: "error", message: err.message }, 500);
