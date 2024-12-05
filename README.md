@@ -34,9 +34,8 @@ Base URL: `http://localhost:3000`
 | `/products`     | `GET`    | Get all products     |
 | `/products/:id` | `GET`    | Get product by id    |
 | `/products`     | `POST`   | Add new product      |
-| `/products`     | `DELETE` | Delete all products  |
-| `/products/:id` | `DELETE` | Delete product by id |
 | `/products/:id` | `PUT`    | Update product by id |
+| `/products/:id` | `DELETE` | Delete product by id |
 
 ### Authentication & User API
 
