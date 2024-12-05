@@ -1,4 +1,6 @@
-# deps
+# dependencies
 node_modules/
 .env
 
+# generated files
+generated/
