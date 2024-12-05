@@ -1,12 +1,23 @@
 {
   "name": "freshmarker-api",
   "scripts": {
-    "dev": "bun run --hot src/index.ts"
+    "dev": "bun run --hot src/index.ts",
+    "start": "bun run src/index.ts",
+    "migrate": "prisma migrate dev",
+    "migrate:deploy": "prisma migrate deploy",
+    "generate": "prisma generate",
+    "studio": "prisma studio",
+    "docker:up": "docker compose up -d"
   },
   "dependencies": {
-    "hono": "^4.6.12"
+    "@prisma/client": "^6.0.1"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "hono": "^4.6.12",
+    "@types/bun": "latest",
+    "@types/node": "^22.10.1",
+    "prisma": "^6.0.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
   }
 }
