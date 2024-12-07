@@ -7,7 +7,9 @@
     "migrate:deploy": "prisma migrate deploy",
     "generate": "prisma generate",
     "studio": "prisma studio",
-    "docker:up": "docker compose up -d"
+    "docker:up": "docker compose up -d",
+    "db:seed": "tsx prisma/seed.ts",
+    "db:reset": "prisma migrate reset --force"
   },
   "dependencies": {
     "@hono/swagger-ui": "^0.5.0",
