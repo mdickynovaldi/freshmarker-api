@@ -71,6 +71,22 @@ bun install
 
 ### Database Setup
 
+Setup the `.env` file:
+
+```sh
+cp .env.example .env
+```
+
+Edit `.env`:
+
+```sh
+DATABASE_URL=postgresql://user:password@localhost:5432/freshmarket
+
+POSTGRES_USER=user
+POSTGRES_PASSWORD=password
+POSTGRES_DB=freshmarket
+```
+
 Setup database:
 
 ```sh

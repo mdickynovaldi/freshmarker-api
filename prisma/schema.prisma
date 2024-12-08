@@ -24,8 +24,8 @@ model Product {
   name        String
   price       Decimal @db.Money
   description String? @db.VarChar(1000)
-  stock       Int     @default(0)
-  weight      Int     @default(0)
+  stock       Int     @default(0) // Unit / Quantity
+  weight      Int     @default(0) // gram
 
   images Image[]
 

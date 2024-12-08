@@ -3,13 +3,13 @@
   "scripts": {
     "dev": "bun run --hot src/index.ts",
     "start": "bun run src/index.ts",
+    "docker:up": "docker compose up -d",
     "migrate": "prisma migrate dev",
     "migrate:deploy": "prisma migrate deploy",
+    "migrate:reset": "prisma migrate reset --force",
     "generate": "prisma generate",
-    "studio": "prisma studio",
-    "docker:up": "docker compose up -d",
-    "db:seed": "tsx prisma/seed.ts",
-    "db:reset": "prisma migrate reset --force"
+    "seed": "tsx prisma/seed.ts",
+    "studio": "prisma studio"
   },
   "dependencies": {
     "@hono/swagger-ui": "^0.5.0",
