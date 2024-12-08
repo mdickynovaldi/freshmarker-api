@@ -1,7 +1,7 @@
 import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
 
 import { prisma } from "../libs/db";
-import { ProductSchema } from "../../prisma/generated/zod";
+import { ImageSchema, ProductSchema } from "../../prisma/generated/zod";
 import {
   ParamsSlugSchema,
   ProductInputSchema as ProductInputSchema,
@@ -48,7 +48,13 @@ productsRoute.openapi(
     responses: {
       200: {
         description: "Get product by slug response",
-        content: { "application/json": { schema: ProductSchema } },
+        content: {
+          "application/json": {
+            schema: ProductSchema.extend({
+              images: z.array(ImageSchema),
+            }),
+          },
+        },
       },
       404: {
         description: "Get product by slug not found response",
@@ -73,7 +79,7 @@ productsRoute.openapi(
 productsRoute.openapi(
   createRoute({
     method: "post",
-    path: "/add",
+    path: "/",
     tags,
     description: "Add new product",
     request: {
@@ -130,7 +136,7 @@ productsRoute.openapi(
 productsRoute.openapi(
   createRoute({
     method: "put",
-    path: "/update/:id",
+    path: "/:id",
     tags,
     description: "Edit existing product",
     parameters: [
@@ -199,8 +205,7 @@ productsRoute.openapi(
 productsRoute.openapi(
   createRoute({
     method: "delete",
-    path: "/delete/:slug",
-    tags,
+    path: "/:slug",
     description: "Delete product by slug",
     request: {
       params: ParamsSlugSchema,
