@@ -206,6 +206,7 @@ productsRoute.openapi(
   createRoute({
     method: "delete",
     path: "/:slug",
+    tags,
     description: "Delete product by slug",
     request: {
       params: ParamsSlugSchema,
