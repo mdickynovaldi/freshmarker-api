@@ -11,5 +11,5 @@ export const ProductInputSchema = z.object({
   description: z.string().optional(),
   stock: z.number(),
   weight: z.number(),
-  images: z.array(z.object({ url: z.string() })),
+  images: z.array(z.object({ url: z.string(), alt: z.string().optional() })),
 });

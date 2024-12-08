@@ -59,7 +59,10 @@ productsRoute.openapi(
   async (c) => {
     const { slug } = c.req.valid("param");
 
-    const product = await prisma.product.findUnique({ where: { slug } });
+    const product = await prisma.product.findUnique({
+      where: { slug },
+      include: { images: true },
+    });
 
     if (!product) return c.json({ message: "Product not found" }, 404);
 
@@ -106,7 +109,10 @@ productsRoute.openapi(
           stock: body.stock,
           weight: body.weight,
           images: {
-            create: body.images,
+            create: body.images.map((image) => ({
+              url: image.url,
+              alt: image.alt || "",
+            })),
           },
         },
         include: {
