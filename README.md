@@ -15,21 +15,17 @@ Modern REST API application for fresh market e-commerce, built using Bun and Pri
 - [API Specification](#api-specification)
 - [Getting Started](#getting-started)
 - [Database Setup](#database-setup)
-</div>
 
-<div id="features">
- <h2>✨ Main Features</h2>
+## ✨ Features
 
-- 🚀 REST API with Express - Fast and efficient API
-- 📊 PostgreSQL Database with Prisma ORM - Reliable data management
-- 🔐 Authentication with JWT - Guaranteed security
-- 🐳 Docker Support - Easy deployment
-- 🛒 Shopping cart functionality - Seamless shopping experience
-- 📦 Product management - Full inventory control
-</div>
+- REST API with Express
+- PostgreSQL database with Prisma ORM
+- Authentication with JWT
+- Docker support
+- Shopping cart functionality
+- Product management
 
-<div id="api-specification">
- <h2>🔌 API Specification</h2>
+## 🔌 API Specification
 
 Base URL: `http://localhost:3000`
 
@@ -58,10 +54,7 @@ Base URL: `http://localhost:3000`
 | `/cart/items/:id`  | `DELETE` | Authenticated | Remove item from cart |
 | `/cart/items/:id`  | `PUT`    | Authenticated | Update item in cart   |
 
-</div>
-
-<div id="getting-started">
- <h2>🚀 Getting Started</h2>
+## 🚀 Getting Started
 
 ### Initial Setup
 
