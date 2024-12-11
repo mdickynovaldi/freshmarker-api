@@ -8,12 +8,12 @@ A modern REST API for an e-commerce fresh market application, built with Bun and
 
 ## 📑 Table of Contents
 
-- [Features](#features)
+- [Features](#✨features)
 - [API Specification](#api-specification)
 - [Getting Started](#getting-started)
 - [Database Setup](#database-setup)
 
-##  Features
+##✨ Features
 
 - REST API with Express
 - PostgreSQL database with Prisma ORM
