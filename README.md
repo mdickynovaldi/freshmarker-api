@@ -11,7 +11,6 @@ A modern REST API for an e-commerce fresh market application, built with Bun and
 - [Features](#features)
 - [API Specification](#api-specification)
 - [Getting Started](#getting-started)
-- [Development](#development)
 - [Database Setup](#database-setup)
 
 ## ✨ Features
