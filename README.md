@@ -9,27 +9,32 @@ Modern REST API application for fresh market e-commerce, built using Bun and Pri
 </div>
 
 <div id="table-of-contents">
- <h2>📑 Table of Contents</h2>
+<h2>📑 Table of Contents</h2>
 
 - [Features](#features)
 - [API Specification](#api-specification)
 - [Getting Started](#getting-started)
 - [Database Setup](#database-setup)
+</div>
 
-## ✨ Features
+<div id="features">
+<h2>✨ Main Features</h2>
 
-- REST API with Express
-- PostgreSQL database with Prisma ORM
-- Authentication with JWT
-- Docker support
-- Shopping cart functionality
-- Product management
+- 🚀 REST API with Express - Fast and efficient API
+- 📊 PostgreSQL Database with Prisma ORM - Reliable data management
+- 🔐 Authentication with JWT - Guaranteed security
+- 🐳 Docker Support - Easy deployment
+- 🛒 Shopping cart functionality - Seamless shopping experience
+- 📦 Product management - Full inventory control
+</div>
 
-## 🔌 API Specification
+<div id="api-specification">
+<h2>🔌 API Specification</h2>
 
 Base URL: `http://localhost:3000`
 
-## Products API
+<div id="products-api">
+### Products API
 
 | Endpoint        | HTTP     | Description          |
 | --------------- | -------- | -------------------- |
@@ -39,7 +44,10 @@ Base URL: `http://localhost:3000`
 | `/products/:id` | `PUT`    | Update product by id |
 | `/products/:id` | `DELETE` | Delete product by id |
 
-## Authentication & User API
+</div>
+
+<div id="auth-api">
+### Authentication & User API
 
 | Endpoint           | HTTP     | Permission    | Description           |
 | ------------------ | -------- | ------------- | --------------------- |
@@ -54,7 +62,11 @@ Base URL: `http://localhost:3000`
 | `/cart/items/:id`  | `DELETE` | Authenticated | Remove item from cart |
 | `/cart/items/:id`  | `PUT`    | Authenticated | Update item in cart   |
 
-## 🚀 Getting Started
+</div>
+</div>
+
+<div id="getting-started">
+<h2>🚀 Getting Started</h2>
 
 ### Initial Setup
 
@@ -144,7 +156,7 @@ bun start
   </div>
 
 <div id="database-setup">
- <h2>🗄️ Database Setup</h2>
+<h2>🗄️ Database Setup</h2>
 
 Setup the `.env` file:
 
@@ -196,16 +208,9 @@ bun start
 
 Open <http://localhost:3000>
 
-### Development Tips
+</div>
 
-- Use Postman or Thunder Client for API testing
-- Monitor Docker logs for debugging
-- Use Prisma Studio for visual database management:
-  ```bash
-  bun prisma studio
-  ```
-  </div>
-
+<div id="prisma-setup">
 ## Prisma Setup
 
 You already have a .gitignore file. Don't forget to add `.env` in it to not commit any private information.
@@ -218,4 +223,3 @@ Next steps:
 4. Run prisma generate to generate the Prisma Client. You can then start querying your database.
 
 </div>
-```
