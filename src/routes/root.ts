@@ -20,7 +20,7 @@ rootRoute.openapi(
         swagger: "/swagger",
         openapi: "/openapi.json",
       },
-      endpoints: ["/", "/hello", "/products"],
+      endpoints: ["/", "/hello", "/products", "/users"],
     });
   }
 );

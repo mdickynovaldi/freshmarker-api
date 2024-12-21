@@ -7,7 +7,7 @@ import { apiReference } from "@scalar/hono-api-reference";
 import { ProcessEnv } from "./env";
 import { rootRoute } from "./routes/root";
 import { productsRoute } from "./routes/products";
-
+import { usersRoute } from "./routes/users";
 const app = new OpenAPIHono();
 
 // Configure Middlewares
@@ -17,7 +17,8 @@ app.use("*", logger()).use("*", cors());
 const apiRoutes = app
   .basePath("/")
   .route("/", rootRoute)
-  .route("/products", productsRoute);
+  .route("/products", productsRoute)
+  .route("/users", usersRoute);
 
 apiRoutes
   .doc("/openapi.json", {

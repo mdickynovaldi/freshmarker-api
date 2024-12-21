@@ -24,8 +24,8 @@ model Product {
   name        String
   price       Decimal @db.Money
   description String? @db.VarChar(1000)
-  stock       Int     @default(0) // Unit / Quantity
-  weight      Int     @default(0) // gram
+  stock       Int     @default(0)
+  weight      Int     @default(0)
 
   images Image[]
 
@@ -44,4 +44,19 @@ model Image {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model User {
+  id String @id @default(cuid())
+
+  email    String     @unique
+  password Password[]
+}
+
+model Password {
+  userId String @id
+
+  hash String
+
+  user User @relation(fields: [userId], references: [id])
 }

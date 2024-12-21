@@ -21,7 +21,13 @@ productsRoute.openapi(
     responses: {
       200: {
         description: "Get all products response",
-        content: { "application/json": { schema: z.array(ProductSchema.extend({images:z.array(ImageSchema),},),), } },
+        content: {
+          "application/json": {
+            schema: z.array(
+              ProductSchema.extend({ images: z.array(ImageSchema) })
+            ),
+          },
+        },
       },
     },
   }),
@@ -32,7 +38,7 @@ productsRoute.openapi(
       },
     });
 
-    return c.json(products,200);
+    return c.json(products, 200);
   }
 );
 
