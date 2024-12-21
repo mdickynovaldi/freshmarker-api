@@ -51,11 +51,15 @@ model User {
 
   email    String    @unique
   password Password?
+
+  username String? @unique
+  fullname String?
+  bio      String?
 }
 
 model Password {
   userId String @id
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   hash String
 }

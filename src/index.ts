@@ -8,6 +8,7 @@ import { ProcessEnv } from "./env";
 import { rootRoute } from "./routes/root";
 import { productsRoute } from "./routes/products";
 import { usersRoute } from "./routes/users";
+import { authRoute } from "./routes/auth";
 const app = new OpenAPIHono();
 
 // Configure Middlewares
@@ -17,6 +18,7 @@ app.use("*", logger()).use("*", cors());
 const apiRoutes = app
   .basePath("/")
   .route("/", rootRoute)
+  .route("/auth", authRoute)
   .route("/products", productsRoute)
   .route("/users", usersRoute);
 

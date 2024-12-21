@@ -1,13 +1,13 @@
 import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
 
 import { prisma } from "../libs/db";
-
+import { ParamsSlugSchema, ResponseMessageSchema } from "../schemas/common";
 import {
-  ParamsSlugSchema,
-  ProductInputSchema as ProductInputSchema,
-  ResponseMessageSchema,
-} from "../schemas/common";
-import { ProductSchema, ImageSchema } from "../../prisma/generated/zod";
+  ProductSchema,
+  ImageSchema,
+  ProductCreateInputSchema,
+} from "../../prisma/generated/zod";
+import { ProductInputSchema } from "../schemas/product";
 
 const tags = ["products"];
 
@@ -110,7 +110,7 @@ productsRoute.openapi(
     },
   }),
   async (c) => {
-    const body = await c.req.valid("json");
+    const body = c.req.valid("json");
 
     try {
       const product = await prisma.product.create({

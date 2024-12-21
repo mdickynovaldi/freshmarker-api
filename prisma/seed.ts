@@ -6,10 +6,6 @@ const prisma = new PrismaClient();
 
 async function main() {
   console.log(`🌱 Seeding data...`);
-  
-  // Delete all existing products first
-  await prisma.product.deleteMany({});
-  console.log(`🗑️ Deleted all existing products`);
 
   for (const product of dataProducts) {
     const upsertedProduct = await prisma.product.upsert({
