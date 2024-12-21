@@ -1,12 +1,13 @@
 import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
 
 import { prisma } from "../libs/db";
-import { ImageSchema, ProductSchema } from "../../prisma/generated/zod";
+
 import {
   ParamsSlugSchema,
   ProductInputSchema as ProductInputSchema,
   ResponseMessageSchema,
 } from "../schemas/common";
+import { ProductSchema, ImageSchema } from "../../prisma/generated/zod";
 
 const tags = ["products"];
 
