@@ -23,20 +23,14 @@ usersRoute.openapi(
         description: "Get all users response",
         content: {
           "application/json": {
-            schema: z.array(
-              UserSchema.extend({ password: z.array(PasswordSchema) })
-            ),
+            schema: z.array(UserSchema),
           },
         },
       },
     },
   }),
   async (c) => {
-    const users = await prisma.user.findMany({
-      include: {
-        password: true,
-      },
-    });
+    const users = await prisma.user.findMany();
     return c.json(users);
   }
 );
@@ -56,7 +50,7 @@ usersRoute.openapi(
         description: "Get user by ID response",
         content: {
           "application/json": {
-            schema: UserSchema.extend({ password: z.array(PasswordSchema) }),
+            schema: UserSchema,
           },
         },
       },
@@ -203,12 +197,8 @@ usersRoute.openapi(
           },
         },
       },
-      404: {
-        description: "User not found",
-        content: { "application/json": { schema: ResponseMessageSchema } },
-      },
-      401: {
-        description: "Invalid password",
+      400: {
+        description: "Login Failed",
         content: { "application/json": { schema: ResponseMessageSchema } },
       },
     },
@@ -222,18 +212,17 @@ usersRoute.openapi(
     });
 
     if (!user) {
-      return c.json({ message: "User not found" }, 404);
+      return c.json({ message: "User not found" }, 400);
     }
-
-    const isPasswordValid = await argon2.verify(
-      user.password[0].hash,
-      password
-    );
+    if (!user.password?.hash) {
+      return c.json({ message: "Password not found" }, 400);
+    }
+    const isPasswordValid = await argon2.verify(user.password.hash, password);
 
     console.log(isPasswordValid);
 
     if (!isPasswordValid) {
-      return c.json({ message: "Invalid password" }, 401);
+      return c.json({ message: "Invalid password" }, 400);
     }
 
     const token = await sign(
