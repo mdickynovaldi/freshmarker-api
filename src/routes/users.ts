@@ -4,7 +4,7 @@ import { z } from "zod";
 import { PasswordSchema, UserSchema } from "../../prisma/generated/zod";
 import { ResponseMessageSchema } from "../schemas/common";
 import * as argon2 from "argon2";
-import { jwt, sign, verify } from "hono/jwt";
+import { sign } from "hono/jwt";
 import { EnvSchema } from "../env";
 
 const tags = ["users"];
@@ -38,63 +38,6 @@ usersRoute.openapi(
       },
     });
     return c.json(users);
-  }
-);
-
-usersRoute.openapi(
-  createRoute({
-    method: "get",
-    path: "/me",
-    tags,
-    request: {
-      headers: z.object({
-        Authorization: z.string(),
-      }),
-    },
-    responses: {
-      200: {
-        description: "Get user by ID response",
-        content: {
-          "application/json": {
-            schema: UserSchema.extend({ password: z.array(PasswordSchema) }),
-          },
-        },
-      },
-      404: {
-        description: "User not found",
-        content: {
-          "application/json": {
-            schema: ResponseMessageSchema,
-          },
-        },
-      },
-    },
-  }),
-  async (c) => {
-    const Authorization = c.req.header("Authorization");
-    const token = Authorization?.split(" ")[1];
-    const decoded = await verify(token as string, JWT_SECRET);
-
-    const { userId, email } = decoded.payload as {
-      userId: string;
-      email: string;
-    };
-
-    const user = await prisma.user.findUnique({
-      where: {
-        id: userId,
-        email,
-      },
-      include: {
-        password: true,
-      },
-    });
-
-    if (!user) {
-      return c.json({ message: "User not found" }, 404);
-    }
-
-    return c.json(user, 200);
   }
 );
 
