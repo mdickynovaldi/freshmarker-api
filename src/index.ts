@@ -9,6 +9,7 @@ import { rootRoute } from "./routes/root";
 import { productsRoute } from "./routes/products";
 import { usersRoute } from "./routes/users";
 import { authRoute } from "./routes/auth";
+import { cartRoute } from "./routes/cart";
 const app = new OpenAPIHono();
 
 // Configure Middlewares
@@ -20,7 +21,8 @@ const apiRoutes = app
   .route("/", rootRoute)
   .route("/auth", authRoute)
   .route("/products", productsRoute)
-  .route("/users", usersRoute);
+  .route("/users", usersRoute)
+  .route("/cart", cartRoute);
 
 apiRoutes
   .doc("/openapi.json", {
